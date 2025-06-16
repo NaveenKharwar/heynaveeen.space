@@ -1,7 +1,7 @@
 [
   {
     "title": "Personal Portfolio",
-    "url": "https://github.com/naveenkharwar/heynaveen.space",
+    "url": "https://github.com/naveenkharwar/heynaveeen.space",
     "description": "A minimal personal site built with Astro and Tailwind, featuring my blog, portfolio, and stories.",
     "tech": ["Astro", "Tailwind CSS", "Markdown"],
     "bgColor": "#fce8e6",
