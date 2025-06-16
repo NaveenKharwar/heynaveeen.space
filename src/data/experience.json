@@ -1,0 +1,39 @@
+[
+  {
+    "role": "Sr. Technical Support Engineer",
+    "company": "Brainstorm Force",
+    "type": "Full-time",
+    "date": "Nov 2022 – Present · 2 yrs 7 mos",
+    "isCurrent": true,
+    "location": "Lucknow, Uttar Pradesh, India · Remote",
+    "description": "Providing exceptional technical support to WordPress users by leveraging in-depth knowledge.",
+    "skills": ["JavaScript", "Communication", "Problem Solving", "WordPress", "Customer Support", "Technical Writing", "Team Collaboration"]
+  },
+  {
+    "role": "Technical Support Specialist",
+    "company": "Awesome Motive, Inc.",
+    "type": "Full-time",
+    "date": "Feb 2022 – Sep 2022 · 1 yr 8 mos",
+    "location": "Remote",
+    "description": "Helping WordPress users with All in One SEO and General SEO.",
+    "skills": ["Testing", "Team Collaboration", "SEO", "WordPress", "Technical Support", "Customer Success"]
+  },
+  {
+    "role": "Technical Support Engineer",
+    "company": "BlogVault – WordPress BackUp & Security Redefined",
+    "type": "Full-time",
+    "date": "Nov 2020 – Feb 2021 · 4 mos",
+    "location": "Remote",
+    "description": "Cleaning Malware and identifying new Malwares.",
+    "skills": ["Teamwork", "Malware Analysis", "WordPress", "Customer Support", "Communication", "Security Troubleshooting"]
+  },
+  {
+    "role": "Web Developer",
+    "company": "LUBUS (WordPress, Laravel & React Company)",
+    "type": "Internship",
+    "date": "Jan 2020 – Aug 2020 · 8 mos",
+    "location": "Remote",
+    "description": "Developing websites using WordPress and PHP.",
+    "skills": ["Laravel", "JavaScript", "PHP", "WordPress", "Front-End Development", "Collaboration"]
+  }
+]

@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Experience from "../components/Experience.astro";
+import Review from "../components/Review.astro";
+import ArticleList from "../components/ArticleList.astro";
+import ProjectList from "../components/ProjectList.astro";
+
+import experienceData from "../data/experience.json";
+import projectData from "../data/projects.json";
+
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import NaveenKharwar from "../assets/naveen-kharwar.jpg";
+
+const title = "Naveen Kharwar | Code, Support & Storytelling";
+
+import { getCollection } from "astro:content";
+const articles = await getCollection("articles");
+---
+
+<BaseLayout title={title}>
+	<div class="container px-0 lg:px-24">
+		<div class="flex flex-wrap justify-between">
+			<div class="w-full sm:w-5/12 md:w-4/12 mb-4 md:mb-0">
+				<h2 class="uppercase text-base sm:text-lg md:text-base">what i do</h2>
+			</div>
+			<div class="w-full md:w-10/12 lg:w-7/12">
+				<h2 class="uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+					<span class="block">troubleshoot,</span>
+					<span class="block">code & debug.</span>
+					<span class="block">
+						sometime
+						<a href="/writings" class="relative inline-block group">
+							<span class="text-secondary italic">write</span>
+							<span
+								class="absolute left-0 -bottom-1 w-full h-0.5 bg-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"
+							></span>
+						</a>
+					</span>
+				</h2>
+			</div>
+		</div>
+		<div class="flex flex-col md:flex-row mt-10">
+			<div class="w-full md:w-8/12 relative">
+				<Image
+					src={NaveenKharwar}
+					alt="Naveen Kharwar"
+					class="w-full h-auto rounded-md"
+					format="webp"
+					loading="eager"
+				/>
+			</div>
+
+			<div class="w-full md:w-4/12">
+				<div class="pl-0 md:pl-10 mt-6 md:mt-0">
+					<p>
+						Hi, I’m Naveen, a passionate developer, support engineer, and writer
+						who loves exploring philosophy and storytelling.
+					</p>
+					<p class="mt-4">
+						I’m dedicated to crafting elegant code, solving complex problems,
+						and sharing ideas that inspire. Join me as I blend technology and
+						creativity on this journey of growth and discovery.
+					</p>
+					<div
+						class="mt-5 inline-flex items-center gap-1 px-3 py-1 bg-[#EBFFE5] text-[#38761D] border border-[#38761D] text-sm lowercase rounded-full"
+					>
+						<span class="inline-block w-2 h-2 rounded-full bg-[#38761D]"></span>
+						Available for new project
+					</div>
+					<div class="mt-10">
+						<h3 class="text-xs mb-3">Connect with me:</h3>
+						<div class="flex space-x-6">
+							<a
+								href="https://profiles.wordpress.org/naveenkharwar"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="WordPress Profile"
+							>
+								<Icon name="simple-icons:wordpress" width={20} height={20} />
+							</a>
+							<a
+								href="https://x.com/heynaveeen"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="X Profile"
+							>
+								<Icon name="simple-icons:x" width={20} height={20} />
+							</a>
+							<a
+								href="https://instagram.com/heynaveeen"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="Instagram Profile"
+							>
+								<Icon name="simple-icons:instagram" width={20} height={20} />
+							</a>
+							<a
+								href="https://linkedin.com/in/naveenkharwar"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="LinkedIn Profile"
+							>
+								<Icon name="simple-icons:linkedin" width={20} height={20} />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<Experience data={experienceData} />
+		<Review />
+		<ProjectList projects={projectData} />
+		<ArticleList articles={articles} />
+	</div>
+</BaseLayout>

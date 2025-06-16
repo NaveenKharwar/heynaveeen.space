@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Layout from "@layouts/PostLayout.astro";
+import { formatDate, getTimeAgo } from "@scripts/utils/dateHelpers";
+
+export async function getStaticPaths() {
+	const articles = await getCollection("articles");
+	return articles.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const { slug } = Astro.params as { slug: string };
+
+const entry: CollectionEntry<"articles"> | undefined = await getCollection("articles").then((articles) =>
+	articles.find((entry) => entry.slug === slug)
+);
+
+if (!entry) {
+	throw new Error(`No article found for slug: ${slug}`);
+}
+
+const { Content } = await entry.render();
+const data = entry.data;
+
+const formattedDate = formatDate(data.publishDate);
+const timeAgo = getTimeAgo(data.publishDate);
+
+const image = data.image?.src ?? "/og-default.png";
+---
+
+<Layout
+	title={`Naveen Kharwar | ${data.title}`}
+	description={data.description ?? ""}
+	publishDate={data.publishDate}
+	canonical={`https://heynaveen.space/articles/${slug}`}
+	image={image}
+>
+	<div class="mb-4 text-sm text-gray-500">
+		📅 Published on: <span class="font-medium">{formattedDate}</span><br />
+		⏳ <span class="italic">{timeAgo}</span>
+	</div>
+
+	{Array.isArray(data.tags) && data.tags.length > 0 && (
+		<div class="mb-4">
+			{data.tags.map((tag) => (
+				<span
+					class="inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded"
+				>
+					#{tag}
+				</span>
+			))}
+		</div>
+	)}
+
+	<Content />
+
+	<nav class="my-6 text-sm">
+		<a href="/articles" class="hover:underline decoration-dotted text-accent">
+			← Back to Articles
+		</a>
+	</nav>
+</Layout>

@@ -1,0 +1,59 @@
+---
+import { Image } from "astro:assets";
+import ReviewOne from "../assets/review-one.png";
+import ReviewTwo from "../assets/review-two.png";
+import ReviewThree from "../assets/review-three.png";
+
+type Review = {
+	image: ImageMetadata;
+	link: string;
+	alt: string;
+	rotation: string;
+};
+
+const reviews: Review[] = [
+	{
+		image: ReviewOne,
+		link: "https://wordpress.org/support/topic/reliable-theme-with-standout-support/",
+		alt: "Reliable Theme Review",
+		rotation: "-2deg",
+	},
+	{
+		image: ReviewTwo,
+		link: "https://wordpress.org/support/topic/version-4-9-0-has-a-bug/",
+		alt: "Version Bug Review",
+		rotation: "1.5deg",
+	},
+	{
+		image: ReviewThree,
+		link: "https://wordpress.org/support/topic/exceptional-service-23/",
+		alt: "Exceptional Service Review",
+		rotation: "-3deg",
+	},
+];
+---
+
+<section class="mt-10">
+	<div class="flex flex-wrap justify-center gap-6">
+		{
+			reviews.map((review) => (
+				<a
+					href={review.link}
+					target="_blank"
+					class="w-72 transition-transform duration-300 hover:rotate-[-1deg]"
+					style={`transform: rotate(${review.rotation});`}
+				>
+					<Image
+						src={review.image}
+						width={400}
+						height={500}
+						format="png"
+						quality={100}
+						alt={review.alt}
+						class="rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition-transform duration-300"
+					/>
+				</a>
+			))
+		}
+	</div>
+</section>

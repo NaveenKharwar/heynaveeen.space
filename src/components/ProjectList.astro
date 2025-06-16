@@ -1,0 +1,81 @@
+---
+const props = Astro.props as {
+	projects: {
+		title: string;
+		url: string;
+		description: string;
+		tech?: string[];
+		bgColor?: string;
+		emoji?: string;
+	}[];
+	title?: string;
+}
+
+const { projects, title = "Projects" } = props;
+---
+
+<section class="mt-20">
+	<div class="flex flex-wrap justify-between">
+		<!-- Section Title -->
+		<div class="w-full sm:w-5/12 md:w-4/12 mb-4 lg:mb-0">
+			<h2 class="uppercase text-base sm:text-lg md:text-base">{title}</h2>
+		</div>
+
+		<!-- Project Cards -->
+		<div class="w-full md:w-10/12 lg:w-8/12">
+			{
+				projects.map((project) => (
+					<div
+						class="group grid grid-cols-12 gap-4 items-start mb-10"
+					>
+						{/* Left: Emoji Banner with Custom Background */}
+						<div class="col-span-12 sm:col-span-4 border-0 md:border-r pr-4 border-accent">
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="block group relative overflow-hidden rounded-lg"
+							>
+								<div
+									class="w-full aspect-[3/2] flex items-center justify-center rounded-md transition-transform group-hover:scale-105 text-5xl"
+									style={`background-color: ${project.bgColor ?? "#ffffff"};`}
+								>
+									{project.emoji ?? "💻"}
+								</div>
+
+								<div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-black bg-white rounded-full px-2 py-1 text-xs">
+									↗
+								</div>
+							</a>
+						</div>
+
+						{/* Right: Details */}
+						<div class="col-span-12 sm:col-span-8">
+							<a
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="text-lg font-semibold text-gray-800 hover:underline decoration-dotted group-hover:underline"
+							>
+								{project.title}
+							</a>
+							<p class="text-sm text-gray-700 mt-1">{project.description}</p>
+
+							{project.tech &&project.tech?.length > 0 && (
+								<ul class="mt-2 flex flex-wrap gap-2 text-xs">
+									{project.tech.map((tag) => (
+										<li
+											class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded"
+										>
+											{tag}
+										</li>
+									))}
+								</ul>
+							)}
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

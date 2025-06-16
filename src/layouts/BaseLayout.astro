@@ -1,0 +1,80 @@
+---
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Seo from "@components/Seo.astro";
+import "@styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	image?: string;
+	publishDate?: string | Date;
+}
+
+const { title, description, publishDate, canonical, image } =
+	Astro.props as Props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Serif+Devanagari:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- SEO -->
+		<Seo {title} {description} {canonical} {image} {publishDate} />
+		<title>{title ?? "HeyNaveen"}</title>
+	</head>
+
+	<body class="relative">
+		<!-- Custom Cursor -->
+		<div
+			id="custom-cursor"
+			class="hidden lg:block pointer-events-none fixed top-0 left-0 z-50 w-8 h-8 rounded-full border-2 border-secondary transform -translate-x-1/2 translate-y-2 scale-100 transition-transform duration-300 ease-out"
+		>
+		</div>
+
+		<Header />
+
+		<main class="mx-auto py-8 px-6" role="main">
+			<slot />
+		</main>
+
+		<Footer />
+
+		<!-- Script -->
+		<script type="module" is:inline>
+			const cursor = document.getElementById("custom-cursor");
+
+			document.addEventListener("mousemove", (e) => {
+				if (!cursor) return;
+				const scale = cursor.classList.contains("link-hover") ? 1.5 : 1;
+				cursor.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px) scale(${scale})`;
+			});
+
+			const addHoverEvents = () => {
+				document.querySelectorAll("a").forEach((link) => {
+					link.addEventListener("mouseenter", () => {
+						cursor?.classList.add("link-hover");
+					});
+					link.addEventListener("mouseleave", () => {
+						cursor?.classList.remove("link-hover");
+					});
+				});
+			};
+
+			addHoverEvents();
+
+			const observer = new MutationObserver(addHoverEvents);
+			observer.observe(document.body, { childList: true, subtree: true });
+		</script>
+	</body>
+</html>

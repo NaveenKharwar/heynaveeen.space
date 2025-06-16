@@ -1,0 +1,44 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import PostList from "@components/content/PostList.astro";
+import banner from "@assets/writing-banner.jpg";
+
+// Get Articles
+const articles = await getCollection("articles");
+
+const title = "Articles | Naveen Kharwar";
+const description =
+	"A collection of technical articles and thoughts on development, tools, and digital craftsmanship by Naveen Kharwar.";
+
+const canonical = new URL("/articles", Astro.site).href;
+
+const pageTitle = "Technical Articles and Essays";
+---
+
+<Layout
+	title={title}
+	description={description}
+	canonical={canonical}
+	image={banner.src}
+>
+	<section>
+		<div>
+			<img
+				src={banner.src}
+				alt="Banner"
+				class="w-full lg:w-10/12 mx-auto h-auto mb-8 sm:mb-12 rounded-md"
+			/>
+
+			<div class="max-w-3xl mx-auto">
+				<h2 class="uppercase text-2xl md:text-3xl mb-10">
+					{pageTitle}
+				</h2>
+
+				<div class="space-y-10 sm:space-y-12">
+					<PostList posts={articles} type="article" />
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

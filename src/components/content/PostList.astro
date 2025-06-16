@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from "astro:content";
+type Post = CollectionEntry<"articles"> | CollectionEntry<"writings">;
+
+interface Props {
+	posts: Post[];
+	type: "article" | "writing";
+}
+
+const { posts, type } = Astro.props;
+
+import { truncate } from "../../scripts/utils/truncate";
+import { formatDate } from "../../scripts/utils/dateHelpers";
+import { stripMarkdown } from "../../scripts/utils/stripMarkdown";
+---
+
+<div class="space-y-10 sm:space-y-12">
+	{
+		posts.map((post, index) => {
+			const isArticle = type === "article";
+			const title = post.data.title;
+			const date = post.data.publishDate;
+			const contentType =
+				"contentType" in post.data ? post.data.contentType?.trim() : undefined;
+			const tags = "tags" in post.data ? (post.data.tags ?? []) : [];
+			const summary = truncate(stripMarkdown(post.body), 200);
+			const url = `/${isArticle ? "articles" : "writings"}/${post.slug}`;
+
+			return (
+				<>
+					<a
+						href={url}
+						class="block group relative transition-all duration-200"
+					>
+						<article
+							class={`cursor-pointer ${type === "writing" ? "markdown-styles" : ""}`}
+						>
+							<header class="mb-2">
+								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+									<h3 class="w-full sm:w-[60%] text-lg font-semibold text-gray-900 group-hover:underline decoration-dotted mb-2">
+										{title}
+									</h3>
+
+									{type === "writing" && contentType && (
+										<span class="text-sm italic text-accent hidden sm:inline-block underline decoration-dotted">
+											Read {contentType} →
+										</span>
+									)}
+
+									{type === "article" && (
+										<span class="text-sm italic text-accent hidden sm:inline-block underline decoration-dotted">
+											Read full article →
+										</span>
+									)}
+								</div>
+								<p class="text-sm text-gray-500 mb-1">{formatDate(date)}</p>
+
+								{type === "article" && tags.length > 0 && (
+									<div class="mt-3 mb-7 flex flex-wrap gap-2">
+										{tags.map((tag) => (
+											<span class="text-xs bg-gray-100 text-gray-800 px-2 py-0.5 rounded">
+												{tag}
+											</span>
+										))}
+									</div>
+								)}
+							</header>
+
+							<p class="text-gray-700 leading-relaxed mb-2">{summary}</p>
+
+							{type === "writing" && contentType && (
+								<div class="block sm:hidden mt-6">
+									<span class="text-sm italic text-accent group-hover:underline decoration-dotted">
+										Read {contentType} →
+									</span>
+								</div>
+							)}
+
+							{type === "article" && (
+								<div class="block sm:hidden mt-6">
+									<span class="text-sm italic text-accent group-hover:underline decoration-dotted">
+										Read full article →
+									</span>
+								</div>
+							)}
+						</article>
+					</a>
+
+					{index !== posts.length - 1 && (
+						<div class="text-center text-[#a88d66] text-5xl select-none">❦</div>
+					)}
+				</>
+			);
+		})
+	}
+</div>

@@ -1,0 +1,43 @@
+---
+const {
+  title = "Naveen Kharwar",
+  description = "Developer, writer, and thinker. Welcome to my digital home.",
+  canonical = Astro.url.href,
+  image = "og-default.png",
+  publishDate,
+} = Astro.props;
+
+const imageUrl = image.startsWith("http")
+  ? image
+  : new URL(`/${image.replace(/^\/+/, "")}`, Astro.site).href;
+
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:image" content={imageUrl} />
+{publishDate && (
+  <meta
+    property="article:published_time"
+    content={publishDate instanceof Date ? publishDate.toISOString() : publishDate}
+  />
+)}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">

@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+	--color-secondary: #6366f1;
+	--color-accent: #8b6f47;
+}
+
+@utility container {
+	@apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@layer base {
+	body {
+		@apply h-screen bg-auto bg-[#e9debe];
+		background-image: url("../assets/texture.png");
+		font-family: "Josefin Sans", sans-serif;
+	}
+
+	::selection {
+		@apply bg-secondary text-white;
+	}
+}
+
+@layer utilities {
+	.markdown-styles p {
+		font-family: "Noto Serif Devanagari", serif;
+	}
+	.markdown-styles h1 {
+		@apply text-3xl font-semibold mt-10 mb-4;
+	}
+	.markdown-styles h2 {
+		@apply text-2xl font-semibold mt-8 mb-4;
+	}
+	.markdown-styles h3 {
+		@apply text-xl font-medium mt-6 mb-3;
+	}
+	.markdown-styles p {
+		@apply mb-4;
+	}
+	.markdown-styles blockquote {
+		@apply border-l-4 border-gray-300 pl-4 italic text-gray-600 my-6;
+	}
+	.markdown-styles ul {
+		@apply list-disc ml-6 mb-4;
+	}
+	.markdown-styles ol {
+		@apply list-decimal ml-6 mb-4;
+	}
+	.markdown-styles li {
+		@apply mb-1;
+	}
+	.markdown-styles pre {
+		@apply bg-gray-100 p-4 rounded text-sm overflow-x-auto mb-4;
+	}
+	.markdown-styles code {
+		@apply bg-gray-200 px-1 py-0.5 rounded text-sm font-mono;
+	}
+	.markdown-styles hr {
+		@apply my-8 border-gray-300;
+	}
+	.markdown-styles blockquote {
+		@apply relative border-l-4 pl-4 italic text-gray-700 my-8;
+	}
+
+	.markdown-styles a {
+		@apply underline decoration-dotted;
+	}
+
+	#mobileMenu {
+		@apply h-screen bg-auto bg-[#e9debe];
+		background-image: url("../assets/texture.png");
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+
+	#mobileMenu::-webkit-scrollbar {
+		display: none;
+	}
+}

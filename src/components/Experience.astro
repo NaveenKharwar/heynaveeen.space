@@ -1,0 +1,76 @@
+---
+interface Experience {
+  id?: string;
+  role: string;
+  company: string;
+  type: string;
+  date: string;
+  location: string;
+  description: string;
+  skills?: string[];
+  isCurrent?: boolean;
+}
+
+interface Props {
+  data: Experience[];
+}
+const { data } = Astro.props;
+
+import { calculateDuration } from "@scripts/utils/calculateDuration";
+
+---
+
+<section class="mt-20">
+  <div class="flex flex-wrap justify-between">
+    <div class="w-full sm:w-5/12 md:w-4/12 mb-4 md:mb-0">
+      <h2 class="uppercase text-base sm:text-lg md:text-base">Experience</h2>
+    </div>
+
+    <div class="w-full md:w-10/12 lg:w-8/12">
+      {
+        data.map((exp) => {
+          // Trim date string to avoid extra spaces
+          const trimmedDate = exp.date.trim();
+
+          let dateDisplay = trimmedDate;
+
+          if (exp.isCurrent || trimmedDate.includes("Present")) {
+            const startDateStr = trimmedDate.split("–")[0].trim();
+            const duration = calculateDuration(startDateStr);
+            dateDisplay = `${startDateStr} – Present · ${duration}`;
+          }
+
+          return (
+            <div
+              class="grid grid-cols-12 gap-4 items-start mb-8"
+            >
+              {/* Left: Date */}
+              <div class="col-span-12 sm:col-span-3 text-sm text-gray-500 font-medium leading-6">
+                {dateDisplay}
+              </div>
+
+              {/* Right: Details */}
+              <div class="col-span-12 sm:col-span-9 border-l pl-4 border-accent">
+                <h3 class="text-base font-semibold text-gray-800">{exp.role}</h3>
+                <p class="text-sm text-gray-600">
+                  {exp.company} · {exp.type}
+                </p>
+                <p class="text-sm text-gray-500">{exp.location}</p>
+                <p class="text-sm text-gray-700 mt-1">{exp.description}</p>
+                <div class="mt-2 flex flex-wrap gap-2 text-xs">
+                  {(exp.skills || []).map((skill) => (
+                    <span
+                      class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

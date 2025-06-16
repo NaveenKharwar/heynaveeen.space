@@ -1,0 +1,47 @@
+---
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Seo from "@components/Seo.astro";
+import "@styles/global.css";
+
+interface Props {
+	title: string;
+	description: string;
+	publishDate?: string | Date;
+	canonical?: string;
+	image?: string;
+}
+
+const { title, description, publishDate, canonical, image } =
+	Astro.props as Props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Serif+Devanagari:wght@100..900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- SEO Meta Tags -->
+		<Seo {title} {description} {canonical} {image} {publishDate} />
+	</head>
+	<body class="relative">
+		<Header />
+
+		<main class="max-w-xl mx-auto px-6 py-8 markdown-styles">
+			<slot />
+			<div class="text-center text-[#a88d66] text-5xl mb-20 mt-24 select-none">
+				❦
+			</div>
+		</main>
+
+		<Footer />
+	</body>
+</html>

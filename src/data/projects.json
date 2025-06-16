@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Personal Portfolio",
+    "url": "https://github.com/naveenkharwar/heynaveen.space",
+    "description": "A minimal personal site built with Astro and Tailwind, featuring my blog, portfolio, and stories.",
+    "tech": ["Astro", "Tailwind CSS", "Markdown"],
+    "bgColor": "#fce8e6",
+    "bgColorLight": "#fff4f3",
+    "emoji": "🌐"
+  },
+  {
+    "title": "VineNotely [WIP]",
+    "url": "http://github.com/naveenkharwar/vineNotely/",
+    "description": "A note app that just works fine.. like fine Vine — 🥁 introducing 🥁 VineNotely!! ✨.",
+    "tech": ["NodeJS", "ReactJS", "MongoDB", "Tailwind CSS", "ExpressJS"],
+    "bgColor": "#e0f7f4",
+    "bgColorLight": "#f0fcfb",
+    "emoji": "📝"
+  },
+  {
+    "title": "Clone of [https://www.decathlon.in/]",
+    "url": "https://github.com/NaveenKharwar/dekaathlon",
+    "description": "This project is a clone of an e-commerce website https://www.decathlon.in/ created using React.",
+    "tech": ["ReactJS", "Tailwind CSS", "JavaScript"],
+    "bgColor": "#f0f4ff",
+    "bgColorLight": "#f9fbff",
+    "emoji": "🏬"
+  },
+  {
+    "title": "Clone of [https://www.starwars.com/]",
+    "url": "https://github.com/NaveenKharwar/starwars-clone",
+    "description": "This project is a clone of the official Star Wars website created using React. It utilizes styled-components for styling and leverages React hooks such as useState and useEffect for managing state and side effects.",
+    "tech": ["ReactJS", "styled-components", "useState and useEffect"],
+    "bgColor": "#f5f3ff",
+    "bgColorLight": "#fcfbff",
+    "emoji": "🛸"
+  },
+  {
+    "title": "Tabut WordPress Theme",
+    "url": "https://wordpress.org/themes/tabut/",
+    "description": "Tabut is a user-friendly, modern, and responsive theme, built with most popular Bulma CSS with SEO in mind. Tabut is perfect for businesses, professional free-lancers, and creative individuals. Tabut comes with customizable theme options and a very appealing homepage design.",
+    "tech": ["JavaScript", "PHP", "CSS"],
+    "bgColor": "#fff7e6",
+    "bgColorLight": "#fffdf2",
+    "emoji": "🎨"
+  }
+]

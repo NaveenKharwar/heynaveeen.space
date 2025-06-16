@@ -1,0 +1,43 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import PostList from "@components/content/PostList.astro";
+import banner from "@assets/writing-banner.jpg";
+
+// Get writings
+const writings = await getCollection("writings");
+
+const title = "Writings | Naveen Kharwar";
+const description =
+	"A collection of poems, short stories, and reflections by Naveen Kharwar. Discover raw thoughts and structured words.";
+const canonical = new URL("/writings", Astro.site).href;
+
+const pageTitle = "My stories and poems";
+---
+
+<Layout
+	title={title}
+	description={description}
+	canonical={canonical}
+	image={banner.src}
+>
+	<section>
+		<div>
+			<img
+				src={banner.src}
+				alt="Writing Banner"
+				class="w-full lg:w-10/12 mx-auto h-auto mb-8 sm:mb-12 rounded-md"
+			/>
+
+			<div class="max-w-3xl mx-auto">
+				<h2 class="uppercase text-2xl md:text-3xl mb-10">
+					{pageTitle}
+				</h2>
+
+				<div class="space-y-10 sm:space-y-12">
+					<PostList posts={writings} type="writing" />
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
